@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Activity 8</string>
+    <string name="tdeletedata">Hapus</string>
+    <string name="tsimpan">Simpan</string>
+    <string name="tcancel">Batal</string>
+    <string name="teditdata">Ubah</string>
+    <string name="tnama">Nama</string>
+    <string name="tnotelp">No. Telepon</string>
+    <string name="tcreatedata">Buat</string>
+    <string name="tview">Lihat</string>
+</resources>

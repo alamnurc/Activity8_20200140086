@@ -34,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private TemanAdapter adapter;
     private ArrayList<Teman> temanArrayList = new ArrayList<>();
 
-    private static final String TAG         = MainActivity.class.getSimpleName();
-    private static String url_select        = "http://10.0.2.2/umyTI/bacateman.php";
-    public static final String TAG_ID       = "id";
-    public static final String TAG_NAMA     = "nama";
-    public static final String TAG_TELEPON  = "telepon";
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static String url_select = "http://10.0.2.2/umyTI/bacateman.php";
+
+    public static final String TAG_ID = "id";
+    public static final String TAG_NAMA = "nama";
+    public static final String TAG_TELEPON = "telepon";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +56,18 @@ public class MainActivity extends AppCompatActivity {
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TambahTeman.class);
                 startActivity(intent);
             }
         });
     }
 
-    public void BacaData(){
-
+    public void BacaData() {
+        temanArrayList.clear();
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        JsonArrayRequest jArr = new JsonArrayRequest(url_select,new Response.Listener<JSONArray>() {
+        JsonArrayRequest jArr = new JsonArrayRequest(url_select, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(TAG, response.toString());
@@ -82,16 +83,17 @@ public class MainActivity extends AppCompatActivity {
                         item.setNama(obj.getString(TAG_NAMA));
                         item.setTelepon(obj.getString(TAG_TELEPON));
 
-                        //menambah item ke array
+                        // menambah item ke array
                         temanArrayList.add(item);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+                adapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
-            public void  onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 error.printStackTrace();
                 Toast.makeText(MainActivity.this, "gagal", Toast.LENGTH_SHORT).show();
